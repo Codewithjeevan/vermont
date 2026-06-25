@@ -1,0 +1,7 @@
+AuthName "test.vermontretail.in statistics"
+AuthType Basic
+AuthUserFile /home/test.vermontretail.in/.stats-htpasswd
+require valid-user
+<Files .stats-htpasswd>
+deny from all
+</Files>

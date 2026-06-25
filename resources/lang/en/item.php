@@ -1,0 +1,40 @@
+<?php 
+
+return [
+'add_edit_item' 		=> 'Add/Edit Item',
+'s_no'					=> 'Item No.',
+'product_code'			=> 'Product Code',
+'item_product'			=> 'Item/Product',
+'c_p'					=> 'C.P.',
+'s_p'					=> 'S.P.',
+'expiry'				=> 'Expiry',
+'package'				=> 'Package',
+'qty'					=> 'Qty',
+'add_package'			=> 'Add Package',
+'item_name'				=> 'Item Name',
+'update_package'		=> "Update Package",
+'item_code'				=> 'Item Code',
+'quantity'				=> 'Quantity',
+'item_product_arabic'	=> 'البند / المنتج',
+'promotion_from'		=> 'Promotion From',
+'promotion_to'	     	=> 'Promotion To',
+'x_y_Promo'				=> "X On Y Promo.",
+'add_promo'				=> 'Add Promo.',
+'update_promo'			=> 'Update Promo.',
+'reset_promo'			=> 'Reset Promo.',
+'x_item_name'			=> 'X-Item Name',
+'y_item_name'			=> 'Y-Item Name',
+'x_quantity'			=> 'X Quantity',
+'y_quantity'			=> 'Y Quantity',
+'serial_number'			=>'Serial Number',
+'wholesale'				=> 'Wholesale',
+'item_with_boxes'		=> 'Show at billing box',
+'s_p_r' 				=> 'S.P.( Retail )',
+'s_p_w'					=> 'S.P.( Wholesale )',
+'y_item_barcode'		=> 'Y-Item Barcode',
+'cp_vat_percent'		=> 'C.P. VAT (%)',
+'refrence_number'       => 'Reference Number',
+
+
+
+];
