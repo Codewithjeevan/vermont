@@ -82,7 +82,7 @@ class AuditReportController extends Controller
          $timestamp = $carbon->timestamp;
          $format = $carbon->format($this->rDateFormat);
          $exportName = 'AuditReport-'.$format; 
-         Excel::create($exportName, function ($excel) use($arrAudits){
+         \App\Legacy\LegacyExcel::create($exportName, function ($excel) use($arrAudits){
 
           $excel->sheet('AuditReport', function ($sheet) use($arrAudits){
 

@@ -213,7 +213,7 @@ class PurchaseOrderController extends Controller
        $format = $carbon->format($this->rDateFormat);
        $exportName = 'PurchaseOrder-'.$format; 
 
-       Excel::create($exportName, function ($excel) use($orderList) {
+       \App\Legacy\LegacyExcel::create($exportName, function ($excel) use($orderList) {
 
         $excel->sheet('PurchaseOrder', function ($sheet) use($orderList) {
 

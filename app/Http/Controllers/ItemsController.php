@@ -589,7 +589,7 @@ public function exportToXlsItems(Request $request){
         $item = $this->getExportItems($searchkey,$strFilter,$dblVat);
 
         if(sizeof($item)){
-            Excel::create('Item', function ($excel) use($item){
+            \App\Legacy\LegacyExcel::create('Item', function ($excel) use($item){
                $carbon = Carbon::today();
                $timestamp = $carbon->timestamp;
                $format = $carbon->format('Y-m-d');
@@ -739,7 +739,7 @@ public function exportToExpiry(Request $request){
            $timestamp = $carbon->timestamp;
            $format = $carbon->format($this->rDateFormat);
            $exportName = 'ExpiryItem'.$format; 
-           Excel::create($exportName, function ($excel) use($expiry){
+           \App\Legacy\LegacyExcel::create($exportName, function ($excel) use($expiry){
 
             $excel->sheet('ExpiryItem', function ($sheet) use($expiry){
 
@@ -842,7 +842,7 @@ public function uploadFile(Request $request){
         }
 
 
-        $excelData = \Excel::load(storage_path().'/import/'. $name, function($reader) {})->get();
+        $excelData = \App\Legacy\LegacyExcel::load(storage_path().'/import/'. $name, function($reader) {})->get();
 
 
         foreach ($excelData as $e) {
@@ -1558,7 +1558,7 @@ public function exportToXlsItemsMaster(Request $request){
        $item = $this->getExportItems($searchkey,$strFilter,$dblVat);
 
        if(sizeof($item)){
-        Excel::create('Item', function ($excel) use($item){
+        \App\Legacy\LegacyExcel::create('Item', function ($excel) use($item){
            $carbon = Carbon::today();
            $timestamp = $carbon->timestamp;
            $format = $carbon->format('Y-m-d');

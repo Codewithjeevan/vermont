@@ -175,7 +175,7 @@ class CustomerLedgersController extends Controller
         $timestamp = $carbon->timestamp;
         $format = $carbon->format($this->rDateFormat);
         $exportName = 'Customer_Ledger-'.$format;     
-        Excel::create($exportName, function ($excel) 
+        \App\Legacy\LegacyExcel::create($exportName, function ($excel) 
             use($ledgerC,
                 $total,
                 $totalDebit,

@@ -183,7 +183,7 @@ class UsersController extends Controller
             $timestamp = $carbon->timestamp;
             $format = $carbon->format('Y-m-d');
             $exportName = 'User'.$format;
-            Excel::create($exportName, function ($excel) {
+            \App\Legacy\LegacyExcel::create($exportName, function ($excel) {
 
                 $excel->sheet('User', function ($sheet) {
 

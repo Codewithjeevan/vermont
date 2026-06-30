@@ -615,7 +615,7 @@ public function uploadFile(Request $request){
             $i++;
             $file->move(storage_path().'/import', $name); 
 
-            $excelData = \Excel::load(storage_path().'/import/'. $name, function($reader) {})->get();
+            $excelData = \App\Legacy\LegacyExcel::load(storage_path().'/import/'. $name, function($reader) {})->get();
 
             foreach ($excelData as $e) { 
                 $it = Item::with(["categories"])->where("barcode", "=", $e->item_code)->get();
@@ -693,7 +693,7 @@ public function uploadFile(Request $request){
         } else {
             $file->move(storage_path().'/import', $name); 
 
-            $excelData = \Excel::load(storage_path().'/import/'. $name, function($reader) {})->get();
+            $excelData = \App\Legacy\LegacyExcel::load(storage_path().'/import/'. $name, function($reader) {})->get();
 
             foreach ($excelData as $e) {
                 $it = Item::with(["categories"])->where("barcode", "=", $e->item_code)->get();

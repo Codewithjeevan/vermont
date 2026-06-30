@@ -170,7 +170,7 @@ class LocationsController extends Controller
                $format = $carbon->format('Y-m-d');
                $exportName = 'Location'.$format; 
 
-               Excel::create($exportName, function ($excel) {
+               \App\Legacy\LegacyExcel::create($exportName, function ($excel) {
 
                 $excel->sheet('Location', function ($sheet) {
 

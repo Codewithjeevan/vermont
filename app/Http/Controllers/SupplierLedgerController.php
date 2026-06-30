@@ -182,7 +182,7 @@ class SupplierLedgerController extends Controller
         $timestamp = $carbon->timestamp;
         $format = $carbon->format($this->rDateFormat);
         $exportName = 'SupplierLedger-'.$format;     
-        Excel::create($exportName, function ($excel) 
+        \App\Legacy\LegacyExcel::create($exportName, function ($excel) 
           use($ledger,
             $total,
             $totalDebit,

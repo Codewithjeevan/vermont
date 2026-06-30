@@ -158,7 +158,7 @@ class BanksController extends Controller
                $format = $carbon->format('Y-m-d');
                $exportName = 'Bank'.$format; 
 
-               Excel::create($exportName, function ($excel) {
+               \App\Legacy\LegacyExcel::create($exportName, function ($excel) {
 
                 $excel->sheet('Bank', function ($sheet) {
 

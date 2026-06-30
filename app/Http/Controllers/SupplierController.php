@@ -185,7 +185,7 @@ class SupplierController extends Controller
          $timestamp = $carbon->timestamp;
          $format = $carbon->format('Y-m-d');
          $exportName = 'Supplier'.$format; 
-         Excel::create($exportName, function ($excel) {
+         \App\Legacy\LegacyExcel::create($exportName, function ($excel) {
 
           $excel->sheet('Supplier', function ($sheet) {
 

@@ -141,7 +141,7 @@ class StockBalanceSummaryController extends Controller
 				$timestamp = $carbon->timestamp;
 				$format = $carbon->format($this->rDateFormat );
 				$exportName = 'StockBalanceSummaryReport-'.$format; 
-				Excel::create($exportName, function ($excel) 
+				\App\Legacy\LegacyExcel::create($exportName, function ($excel) 
 					use($categoryResponse,
 						$fromDate,
 						$toDate) {

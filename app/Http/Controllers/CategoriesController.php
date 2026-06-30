@@ -162,7 +162,7 @@ class CategoriesController extends Controller
               $format = $carbon->format('Y-m-d');
               $exportName = 'Category'.$format; 
 
-              Excel::create($exportName, function ($excel) {
+              \App\Legacy\LegacyExcel::create($exportName, function ($excel) {
 
                 $excel->sheet('Category', function ($sheet) {
 

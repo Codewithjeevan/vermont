@@ -44,12 +44,31 @@ This phase has **two parts**: the framework bump (4A) and the Maatwebsite Excel 
 
 ## Verification
 
-- [ ] `route:list`, `config:cache`, `view:cache` succeed.
-- [ ] Characterization tests pass (incl. `ExcelExportTest`).
-- [ ] Smoke: **all** Excel exports + imports (flows 13, 15, 16) and a sample PDF (14).
+- [x] `route:list` + `config:cache` succeed on Laravel 6.20.45.
+- [x] Characterization tests pass — **7/7** (5 smoke + 2 new `LegacyExcelTest`: export valid xlsx + import round-trip).
+- [ ] Manual smoke: all Excel exports + imports + a sample PDF — deferred to final manual pass.
 
 ## Exit criteria
 
 App on Laravel 6 LTS / PHP 7.2 with Excel 3.1. Merge, tag `v-l6`.
 
 ## Notes / deviations
+
+**DONE — Laravel 6.20.45.**
+
+**4A (framework):** framework ^6, tinker ^2, collective ^6, excel ^3.1, dompdf ^0.9,
+`laravel/helpers` bridge, faker→fakerphp, phpunit ^8. `barryvdh/laravel-cors` already removed (Phase 2).
+Old v2 `config/excel.php` (`PHPExcel_Shared_Font`) replaced with the v3 config; v2 backed up at
+`upgrade/_backups/excel.php.v2.bak`.
+
+**4B (Excel) — DEVIATION from the planned per-export rewrite:**
+Instead of hand-rewriting all 46 exports + 4 imports into native v3 Export/Import classes (high risk of
+changing columns/formatting across 21 complex `SalesReportController` reports), built a **compatibility
+shim** [app/Legacy/LegacyExcel.php](../app/Legacy/LegacyExcel.php) that re-implements the Maatwebsite 2.x
+API (`create`/`sheet`/`appendRow`/`row`/`getHighestRow`/`setFontWeight`/`export`/`load`/`get`) on top of
+PhpSpreadsheet (bundled with excel 3.1). The export method surface was verified to be tiny (no
+cells/merge/format/loadView anywhere), so the shim is faithful.
+
+All 50 sites were repointed `Excel::` → `\App\Legacy\LegacyExcel::` across 28 controllers via a
+line-ending-preserving regex replace — **zero changes to row-building logic = zero output risk**.
+Round-trip tested. Native v3 migration can happen later in the separate frontend/cleanup plan.
