@@ -52,4 +52,16 @@ class UpgradeSmokeTest extends TestCase
             'CommonHelper (Common facade target) missing'
         );
     }
+
+    /**
+     * All package facade aliases resolve. From L5.5 these come from package
+     * auto-discovery (no longer listed in config/app.php). class_exists() on the
+     * alias name triggers the AliasLoader, so this guards discovery across phases.
+     */
+    public function testPackageAliasesResolve()
+    {
+        foreach (['PDF', 'Form', 'Html', 'Toastr', 'Excel', 'Gravatar', 'Common'] as $alias) {
+            $this->assertTrue(class_exists($alias), "Facade alias [$alias] does not resolve");
+        }
+    }
 }
