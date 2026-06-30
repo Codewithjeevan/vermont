@@ -9,9 +9,9 @@
         "barryvdh/laravel-dompdf": "^0.8.0",
         "brian2694/laravel-toastr": "^5.57",
         "guzzlehttp/guzzle": "^6.5",
-        "laravel/framework": "5.5.*",
+        "laravel/framework": "5.6.*",
         "laravel/tinker": "~1.0",
-        "laravelcollective/html": "^5.5",
+        "laravelcollective/html": "^5.6",
       "maatwebsite/excel": "~2.1.0",
         "thomaswelton/laravel-gravatar": "~1.0"
     },
@@ -19,7 +19,7 @@
         "doctrine/dbal": "^2.5",
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "^1.0",
-        "phpunit/phpunit": "~6.0"
+        "phpunit/phpunit": "~7.0"
     },
     "autoload": {
         "classmap": [
