@@ -70,3 +70,24 @@ Switch Laragon to **8.2.27**.
 App on Laravel 11 / PHP 8.2, old Kernels removed, all wiring restored. Merge, tag `v-l11`.
 
 ## Notes / deviations
+
+**DONE — Laravel 11.54.0 on PHP 8.2.27.**
+
+**MAJOR DEVIATION (deliberate, lower-risk): kept the L10 skeleton.**
+Laravel 11 is intentionally backwards-compatible — `app/Http/Kernel.php`, `app/Console/Kernel.php`
+and `app/Exceptions/Handler.php` continue to work unchanged. Rather than rewrite the bootstrap into the
+new slim `bootstrap/app.php` (high risk of mis-wiring the custom `access`/`checkAccess` middleware,
+`Common` facade, exception views, and providers), **the old structure was retained**. The app boots,
+all 441 routes register, config/view cache succeed, and 7/7 tests pass. Migrating to the slim skeleton
+is cosmetic and is deferred to the separate cleanup plan.
+
+**Dependency changes:**
+- **`laravelcollective/html` (no L11 support) → `nekhbet/laravel-collective-html` 1.0.0** — a maintained,
+  **L12-compatible drop-in fork that keeps the original `Collective\Html` namespace + `Form::`/`Html::`
+  facades**, so all 194 form usages and the Blade views are unchanged (verified by the alias-resolution test).
+- `barryvdh/laravel-dompdf` → ^3 (PDF alias still auto-discovered); `laravel/ui` → ^4.5; `tinker` → ^2.9.
+- **`phpunit` → ^11 (11.5.55)** — migrated `phpunit.xml` to the v11 schema. (`composer update` kept reverting
+  the constraint to ^9.5; fixed with an explicit `composer require phpunit/phpunit:^11.0 --dev`.)
+- `.phpunit.cache/` added to `.gitignore`.
+
+Full RBAC/licence/404-500/Common-facade smoke deferred to the final manual pass.
