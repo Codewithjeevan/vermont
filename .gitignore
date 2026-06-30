@@ -10,3 +10,5 @@ Homestead.yaml
 .svn
 /resources/assets/plugins
 /upgrade/_backups/
+/.phpunit.result.cache
+/storage/logs/*.log
