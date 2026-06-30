@@ -50,7 +50,7 @@
 
     <script src="{{ asset('js/plugins.js') }}"></script>
     <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}?v=2"></script>
 
 </body>
 </html>

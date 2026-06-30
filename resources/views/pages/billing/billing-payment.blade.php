@@ -252,13 +252,18 @@
                                     <i class="fa fa-credit-card-alt" aria-hidden="true"></i> @lang("billing.card") & <i class="fa fa-money" aria-hidden="true"></i> 
                                     @lang("billing.cash")
                                     </label>
-                                    <label  class="radio-label list-group-item">
+                                    {{-- Credit hidden for now --}}
+                                    <label  class="radio-label list-group-item" style="display:none;">
                                     <input type="radio" name="optradio"  v-on:change="payment_mode_change(billing.payment_mode)" v-model="billing.payment_mode" value="3" class="rad-payment-mode check-highlights" > <i class="fa fa-sticky-note" aria-hidden="true"></i>
                                     @lang("billing.credit")
                                     </label>
                                     <label class="radio-label list-group-item">
                                     <input type="radio" name="optradio"  v-on:change="payment_mode_change(billing.payment_mode)" v-model="billing.payment_mode" value="4"  class="rad-payment-mode check-highlights"> <i class="fa fa-credit-card-alt" aria-hidden="true"></i> 
                                     @lang("billing.credit_card")
+                                    </label>
+                                    <label class="radio-label list-group-item">
+                                    <input type="radio" name="optradio"  v-on:change="billing.cash_amt=0;billing.card_amt=fixtIt(billing.bil_amt);billing.received=fixtIt(billing.bil_amt);billing.balance=fixtIt(0)" v-model="billing.payment_mode" value="5"  class="rad-payment-mode check-highlights"> <i class="fa fa-clock-o" aria-hidden="true"></i> 
+                                    Dubai Mall Online
                                     </label>
                                  </ul>
                               </div>
@@ -302,7 +307,7 @@
                               <div class="col-md-6 col-sm-6">
                                  <div class="pull-left" style="margin-top: 15px;">
                                     <span><label>Total Items: @{{ itemList.length }}</label> </span> <br>
-                                    <span><label>Payment Mode: @{{ (billing.payment_mode==1) ? 'Cash' : (billing.payment_mode==2) ? 'Card & Cash' : (billing.payment_mode==3) ? 'Credit' : 'Credit Card'  }} </label></span> <br>
+                                    <span><label>Payment Mode: @{{ (billing.payment_mode==1) ? 'Cash' : (billing.payment_mode==2) ? 'Card & Cash' : (billing.payment_mode==3) ? 'Credit' : (billing.payment_mode==5) ? 'Dubai Mall Online' : 'Credit Card'  }} </label></span> <br>
                                     <span><label> SubTotal: @{{curr}} @{{ _discount_subtotal }} </label></span> <br>
                                  </div>
                               </div>

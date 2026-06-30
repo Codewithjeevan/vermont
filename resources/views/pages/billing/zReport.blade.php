@@ -76,6 +76,12 @@
 
 	<div class="row">
 		<div class="col-md-8">
+			<label>Dubai Mall Online (@{{curr}}) = @{{reportZData.saleNoonCredit}}</label>
+		</div>		
+	</div>
+
+	<div class="row">
+		<div class="col-md-8">
 			<label>@lang('billing.sale_return') (@{{curr}}) = @{{reportZData.saleReturn}}</label>
 		</div>		
 	</div>

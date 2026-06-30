@@ -209,7 +209,7 @@ class BillingsController extends Controller
                     $customerId = (isset($bill->_customer->id)) ? $bill->_customer->id:0;
                 }
                 $arrCustData = Customer::with('countryCode')->find($customerId);
-                if(count($arrCustData) && count($loyalty) && ($bill->earned_points != 0 or $bill->loyalty_discount !=0)){
+                if(!empty($arrCustData) && !empty($loyalty) && ($bill->earned_points != 0 or $bill->loyalty_discount !=0)){
                     $intPurchaseAmount = 0;
 
                     $billAmt_ = Billing::where('customer_id','=',$customerId)
@@ -1764,7 +1764,7 @@ class BillingsController extends Controller
         
 
 
-        if(count($itemReturn)){
+        if(!empty($itemReturn)){
 
             /** Added dist_amt for calculation of totalAmount in vuejs */
             $itemReturn = $this->addCustomerDetails($itemReturn);
@@ -2127,7 +2127,7 @@ public function reportZData(){
         $itemList =[];
 
         $last_date_time = DB::table('z_sales')->orderBy('day_close', 'desc')->first();
-        if(sizeof($last_date_time)>0){
+        if(!empty($last_date_time)){
             $last_day_off = $last_date_time->day_close;
         }else{
          $last_day_off = Carbon::now()->format('Y-m-d')." 00:00:00"; 
@@ -2147,7 +2147,7 @@ public function reportZData(){
         FROM bill_returns INNER JOIN billings on bill_returns.billing_id=billings.id 
         where billings.billing_status <> 'hold' AND bill_returns.created_at BETWEEN '".$last_day_off."' and '".Carbon::now()->format('Y-m-d H:i:s')."'"); 
      $sale = DB::select("SELECT IFNULL(sum(billings.cash_amt),0) as cashAmt,
-        IFNULL(sum(billings.card_amt),0)as cardAmt,IFNULL(sum(billings.bil_amt),0)as billAmt 
+        IFNULL(sum(CASE WHEN billings.payment_mode = 5 THEN 0 ELSE billings.card_amt END),0)as cardAmt,IFNULL(sum(billings.bil_amt),0)as billAmt 
         FROM billings 
         where billings.billing_status <> 'hold' AND billings.created_at BETWEEN '".$last_day_off."' and '".Carbon::now()->format('Y-m-d H:i:s')."'");
 
@@ -2155,6 +2155,10 @@ public function reportZData(){
      $saleCredit = DB::select("SELECT IFNULL(sum(billings.bil_amt),0)as creditAmt 
         FROM billings 
         where billings.billing_status <> 'hold' AND billings.payment_mode = 3 and billings.created_at BETWEEN '".$last_day_off."' and '".Carbon::now()->format('Y-m-d H:i:s')."'");
+
+     $saleNoonCredit = DB::select("SELECT IFNULL(sum(billings.bil_amt),0)as creditAmt 
+        FROM billings 
+        where billings.billing_status <> 'hold' AND billings.payment_mode = 5 and billings.created_at BETWEEN '".$last_day_off."' and '".Carbon::now()->format('Y-m-d H:i:s')."'");
 
      if(sizeof($billDetails)>0){
         foreach ($billDetails as $o) {                            
@@ -2177,6 +2181,7 @@ public function reportZData(){
         "cashAmt"   => \Common::fixIt($sale[0]->cashAmt),
         "cardAmt"   => \Common::fixIt($sale[0]->cardAmt),
         "saleCredit"    => \Common::fixIt($saleCredit[0]->creditAmt),
+        "saleNoonCredit"    => \Common::fixIt($saleNoonCredit[0]->creditAmt),
         "last_day_off"  => (new Carbon($last_day_off))->format($this->rDateFormat.' h:i A'),
         "ztoDatePrint"  => Carbon::now()->format($this->rDateFormat.' h:i A'),
     );
@@ -2193,7 +2198,7 @@ public function reportZQtyData(){
         $itemList = array();
 
         $last_date_time = DB::table('z_sales')->orderBy('day_close', 'desc')->first();
-        if(sizeof($last_date_time)>0){
+        if(!empty($last_date_time)){
             $last_day_off = $last_date_time->day_close;
         }else{
           $last_day_off = Carbon::now()->format('Y-m-d')." 00:00:00"; 
@@ -2246,7 +2251,7 @@ public function getLedgerXSales(Request $Request){
             FROM bill_returns INNER JOIN billings on bill_returns.billing_id=billings.id
             where billings.billing_status <> 'hold' AND bill_returns.created_at BETWEEN '".$fromDate."' and '".$toDate."'"); 
         $sale = DB::select("SELECT IFNULL(sum(billings.cash_amt),0) as cashAmt,
-            IFNULL(sum(billings.card_amt),0)as cardAmt,IFNULL(sum(billings.bil_amt),0)as billAmt 
+            IFNULL(sum(CASE WHEN billings.payment_mode = 5 THEN 0 ELSE billings.card_amt END),0)as cardAmt,IFNULL(sum(billings.bil_amt),0)as billAmt 
             FROM billings 
             where billings.billing_status <> 'hold' AND billings.created_at BETWEEN '".$fromDate."' and '".$toDate."'");
 
@@ -2254,6 +2259,10 @@ public function getLedgerXSales(Request $Request){
         $saleCredit = DB::select("SELECT IFNULL(sum(billings.bil_amt),0)as creditAmt 
             FROM billings 
             where billings.billing_status <> 'hold' AND billings.payment_mode = 3 and billings.created_at BETWEEN '".$fromDate."' and '".$toDate."'");
+
+        $saleNoonCredit = DB::select("SELECT IFNULL(sum(billings.bil_amt),0)as creditAmt 
+            FROM billings 
+            where billings.billing_status <> 'hold' AND billings.payment_mode = 5 and billings.created_at BETWEEN '".$fromDate."' and '".$toDate."'");
 
         if(sizeof($billDetails)>0){
             foreach ($billDetails as $o) {                            
@@ -2277,6 +2286,7 @@ public function getLedgerXSales(Request $Request){
             "cashAmt"   => \Common::fixIt($sale[0]->cashAmt),
             "cardAmt"   => \Common::fixIt($sale[0]->cardAmt),
             "saleCredit"    => \Common::fixIt($saleCredit[0]->creditAmt),
+            "saleNoonCredit"    => \Common::fixIt($saleNoonCredit[0]->creditAmt),
             "labels"    => $labels,
             "xtoDatePrint" => (new Carbon($toDate))->format($this->rDateFormat.' h:i A'),
             "xfromDatePrint" => (new Carbon($fromDate))->format($this->rDateFormat.' h:i A'), 
@@ -2565,7 +2575,7 @@ public function getExistingBill(Request $Request){
         }
     }
 
-    if(count($bill)){
+    if(!empty($bill)){
 
 
         $bill->itemList = $this->applyOffers($bill->itemList);
@@ -2771,7 +2781,7 @@ function getHomeBill(Request $Request){
                 }
             }
 
-            if(count($bill)){
+            if(!empty($bill)){
 
                 $items = Item::with(["units",'categories',"offer.item.units","packageList.items.units"])->get();
                 $items = $this->applyOffers($items);
@@ -2873,7 +2883,7 @@ public function getHoldBill(Request $Request){
             }
         }
 
-        if(count($bill)){
+        if(!empty($bill)){
 
 
             $bill->itemList = $this->applyOffers($bill->itemList);
@@ -3106,7 +3116,7 @@ public function activateBilling(){
 
 
 
-    if(count($bill)){       
+    if(!empty($bill)){       
 
         $bill->itemList = $this->applyOffers($bill->itemList);
         $bill = $this->addCustomerDetails($bill);
@@ -3151,14 +3161,14 @@ public function saveLoyaltyPoints($customer_id,$billing_id){
                 $eligibility =0;  
                 $earnedPoints = 0;  
 
-                if(sizeof($customerData) > 0 && sizeof($loyalty) > 0){
+                if(!empty($customerData) && !empty($loyalty)){
                     $loyalty_activation = $loyalty[0]->value;
                     $loyalty_points_on_sale = $loyalty[1]->value;
                     $loyalty_points = $loyalty[2]->value;
 
                     $bill = Billing::where('customer_id','=',$customer_id)
                     ->where('id','=',$billing_id)->first();
-                    if(sizeof($bill) > 0){
+                    if(!empty($bill)){
                         $billAmt_ = Billing::where('customer_id','=',$customer_id)
                         ->where('id','=',$billing_id)
                         ->sum('bil_amt');
@@ -3231,14 +3241,14 @@ public function updateLoyaltyPoints($customer_id,$billing_id,$objBilling){
                 $eligibility =0;  
                 $earnedPoints = 0;  
 
-                if(sizeof($customerData) > 0 && sizeof($loyalty) > 0){
+                if(!empty($customerData) && !empty($loyalty)){
                     $loyalty_activation = $loyalty[0]->value;
                     $loyalty_points_on_sale = $loyalty[1]->value;
                     $loyalty_points = $loyalty[2]->value;
 
                     $bill = Billing::where('customer_id','=',$customer_id)
                     ->where('id','=',$billing_id)->first();
-                    if(sizeof($bill) > 0){
+                    if(!empty($bill)){
                         $billAmt_ = Billing::where('customer_id','=',$customer_id)
                         ->where('id','=',$billing_id)
                         ->sum('bil_amt');
@@ -3308,7 +3318,7 @@ public function saveReturnLoyaltyPoints($customer_id,$billing_id){
                 $eligibility =0;  
                 $earnedPoints = 0;  
 
-                if(sizeof($customerData) > 0 && sizeof($loyalty) > 0){
+                if(!empty($customerData) && !empty($loyalty)){
                     $loyalty_activation = $loyalty[0]->value;
                     $loyalty_points_on_sale = $loyalty[1]->value;
                     $loyalty_points = $loyalty[2]->value;
@@ -3316,7 +3326,7 @@ public function saveReturnLoyaltyPoints($customer_id,$billing_id){
 
                     $bill = Billing::where('customer_id','=',$customer_id)
                     ->where('id','=',$billing_id)->first();
-                    if(sizeof($bill)){
+                    if(!empty($bill)){
                        $billReturnAmt_ = BillReturns::join('billings','billings.id','bill_returns.billing_id')
                        ->where('billings.customer_id','=',$customer_id)
                        ->where('billing_id','=',$billing_id)
@@ -3484,7 +3494,7 @@ public function savePrint(Request $Request,$billId){
         }
     }
 
-    if(count($bill)){
+    if(!empty($bill)){
 
         $bill->itemList = $this->applyOffers($bill->itemList);
 
@@ -3665,7 +3675,7 @@ if(count($itemReturn)){
     }
 }
 
-if(count($bill)){
+if(!empty($bill)){
 
 
     $bill->itemList = $this->applyOffers($bill->itemList);

@@ -84,6 +84,7 @@ class DashboardController extends Controller
         $intCardTransactions = 0;
         $intCashNCardTransactions = 0;
         $intCreditTransactions = 0;
+        $intNoonCreditTransactions = 0;
         $currentUserRole = \Auth::user()->roleId;
         $hourlySalesCount=[];
         $hourlyReturnCount=[];
@@ -178,6 +179,7 @@ class DashboardController extends Controller
                 $intCashNCardTransactions = ($isb->payment_mode == 2) ? $isb->transactions : $intCashNCardTransactions;
                 $intCreditTransactions = ($isb->payment_mode == 3) ? $isb->transactions : $intCreditTransactions;   
                 $intCardTransactions = ($isb->payment_mode == 4) ? $isb->transactions : $intCardTransactions;
+                $intNoonCreditTransactions = ($isb->payment_mode == 5) ? $isb->transactions : $intNoonCreditTransactions;
             }
         }
 
@@ -235,6 +237,7 @@ class DashboardController extends Controller
             'intCashNCardTransactions' => $intCashNCardTransactions,
             'intCreditTransactions' => $intCreditTransactions,
             'intCardTransactions' => $intCardTransactions,
+            'intNoonCreditTransactions' => $intNoonCreditTransactions,
             'arrTopSalingItems' => $arrTopSalingItems,
             'arrCashierSales' => $arrCashierSales,
             'arrSalesmanPer' => $arrSalesmanPer,
@@ -256,6 +259,7 @@ function getSalesDaily(){
         $intCardTransactions = 0;
         $intCashNCardTransactions = 0;
         $intCreditTransactions = 0;
+        $intNoonCreditTransactions = 0;
         $currentUserRole = \Auth::user()->roleId;
 
         $dailySalesCount=array();
@@ -431,6 +435,7 @@ function getSalesDaily(){
                 $intCashNCardTransactions = ($isb->payment_mode == 2) ? $isb->transactions : $intCashNCardTransactions;
                 $intCreditTransactions = ($isb->payment_mode == 3) ? $isb->transactions : $intCreditTransactions;   
                 $intCardTransactions = ($isb->payment_mode == 4) ? $isb->transactions : $intCardTransactions;
+                $intNoonCreditTransactions = ($isb->payment_mode == 5) ? $isb->transactions : $intNoonCreditTransactions;
             }
         }
 
@@ -449,6 +454,7 @@ function getSalesDaily(){
                 $intCashNCardTransactions = ($isb->payment_mode == 2) ? $isb->transactions : $intCashNCardTransactions;
                 $intCreditTransactions = ($isb->payment_mode == 3) ? $isb->transactions : $intCreditTransactions;   
                 $intCardTransactions = ($isb->payment_mode == 4) ? $isb->transactions : $intCardTransactions;
+                $intNoonCreditTransactions = ($isb->payment_mode == 5) ? $isb->transactions : $intNoonCreditTransactions;
             }
         }
 
@@ -508,6 +514,7 @@ function getSalesDaily(){
             'intCashNCardTransactions' => $intCashNCardTransactions,
             'intCreditTransactions' => $intCreditTransactions,
             'intCardTransactions' => $intCardTransactions,
+            'intNoonCreditTransactions' => $intNoonCreditTransactions,
             'arrTopSalingItems' => $arrTopSalingItems,
             'arrCashierSales' => $arrCashierSales,
             'arrSalesmanPer' => $arrSalesmanPer,
@@ -526,6 +533,7 @@ function getSalesMonthly(){
        $intCardTransactions = 0;
        $intCashNCardTransactions = 0;
        $intCreditTransactions = 0;
+       $intNoonCreditTransactions = 0;
        $currentUserRole = \Auth::user()->roleId;
 
        $monthlyData = DB::select(DB::raw("SELECT atMonth, SUM(sale) sales, SUM(amount) sales_amount FROM
@@ -571,6 +579,7 @@ function getSalesMonthly(){
             $intCashNCardTransactions = ($isb->payment_mode == 2) ? $isb->transactions : $intCashNCardTransactions;
             $intCreditTransactions = ($isb->payment_mode == 3) ? $isb->transactions : $intCreditTransactions;   
             $intCardTransactions = ($isb->payment_mode == 4) ? $isb->transactions : $intCardTransactions;
+            $intNoonCreditTransactions = ($isb->payment_mode == 5) ? $isb->transactions : $intNoonCreditTransactions;
         }
     }
 
@@ -684,6 +693,7 @@ function getSalesMonthly(){
         'intCashNCardTransactions' => $intCashNCardTransactions,
         'intCreditTransactions' => $intCreditTransactions,
         'intCardTransactions' => $intCardTransactions,
+        'intNoonCreditTransactions' => $intNoonCreditTransactions,
         'arrTopSalingItems' => $arrTopSalingItems,
         'arrCashierSales' => $arrCashierSales,
         'arrSalesmanPer' => $arrSalesmanPer,
@@ -703,6 +713,7 @@ function getSalesYearly(){
      $intCardTransactions = 0;
      $intCashNCardTransactions = 0;
      $intCreditTransactions = 0;
+     $intNoonCreditTransactions = 0;
      $yearlyData = DB::select(DB::raw("select atYear, sum(sale) as sales, sum(amount) as sales_amount
         from(
         select year(created_at) as atYear, b.id, count(bi.billing_id) as sale, b.bil_amt as amount
@@ -751,6 +762,7 @@ function getSalesYearly(){
             $intCashNCardTransactions = ($isb->payment_mode == 2) ? $isb->transactions : $intCashNCardTransactions;
             $intCreditTransactions = ($isb->payment_mode == 3) ? $isb->transactions : $intCreditTransactions;   
             $intCardTransactions = ($isb->payment_mode == 4) ? $isb->transactions : $intCardTransactions;
+            $intNoonCreditTransactions = ($isb->payment_mode == 5) ? $isb->transactions : $intNoonCreditTransactions;
         }
     }
 
@@ -867,6 +879,7 @@ function getSalesYearly(){
         'intCashNCardTransactions' => $intCashNCardTransactions,
         'intCreditTransactions' => $intCreditTransactions,
         'intCardTransactions' => $intCardTransactions,
+        'intNoonCreditTransactions' => $intNoonCreditTransactions,
         'arrTopSalingItems' => $arrTopSalingItems,
         'arrCashierSales' => $arrCashierSales,
         'arrSalesmanPer' => $arrSalesmanPer,

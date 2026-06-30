@@ -1615,6 +1615,8 @@ public function exportToSalesSummary(Request $request){
 												$pay_mode = 'Credit';
 											}else if($o->payment_mode == 4){
 												$pay_mode = 'Credit Card';
+											}else if($o->payment_mode == 5){
+												$pay_mode = 'Dubai Mall Online';
 											}
 											if($o->customerName == null){
 												$custName="NA";
@@ -1653,6 +1655,8 @@ public function exportToSalesSummary(Request $request){
 												$pay_mode = 'Credit';
 											}else if($o->payment_mode == 4){
 												$pay_mode = 'Credit Card';
+											}else if($o->payment_mode == 5){
+												$pay_mode = 'Dubai Mall Online';
 											}
 											if($o->customerName == null){
 												$custName="NA";
@@ -2081,6 +2085,8 @@ public function getSalesSummaryQuery($fromDate,$toDate){
 					$pay_mode = 'Credit';
 				}else if($o->payment_mode == 4){
 					$pay_mode = 'Credit Card';
+				}else if($o->payment_mode == 5){
+					$pay_mode = 'Dubai Mall Online';
 				}
 				if($o->customerName == null){
 					$custName="NA";
@@ -2494,6 +2500,10 @@ public function getSalesreturnQuery($fromDate,$toDate){
 					$pay_mode = 'Credit Card';
 					$cashAmt= 0;
 					$cardAmt = $o->amount;
+				}else if($o->payment_mode == 5){
+					$pay_mode = 'Dubai Mall Online';
+					$cashAmt= 0;
+					$cardAmt = 0;
 				}
 				if($o->customerName == null){
 					$custName="NA";
@@ -5338,6 +5348,8 @@ public function exportToCategorywiseSalesSummary(Request $request){
 												$pay_mode = 'Credit';
 											}else if($o->payment_mode == 4){
 												$pay_mode = 'Credit Card';
+											}else if($o->payment_mode == 5){
+												$pay_mode = 'Dubai Mall Online';
 											}
 											if($o->customerName == null){
 												$custName="NA";
@@ -5377,6 +5389,8 @@ public function exportToCategorywiseSalesSummary(Request $request){
 												$pay_mode = 'Credit';
 											}else if($o->payment_mode == 4){
 												$pay_mode = 'Credit Card';
+											}else if($o->payment_mode == 5){
+												$pay_mode = 'Dubai Mall Online';
 											}
 											if($o->customerName == null){
 												$custName="NA";
@@ -5509,6 +5523,8 @@ public function getCategorywiseSalesSummaryQuery($fromDate,$toDate,$category_id,
 					$pay_mode = 'Credit';
 				}else if($o->payment_mode == 4){
 					$pay_mode = 'Credit Card';
+				}else if($o->payment_mode == 5){
+					$pay_mode = 'Dubai Mall Online';
 				}
 				if($o->customerName == null){
 					$custName="NA";
@@ -6357,6 +6373,9 @@ public function getCategorywiseSalesSummaryQuery($fromDate,$toDate,$category_id,
 					}else if($o->payment_mode == 4){
 						$pay_mode = 'Credit Card';
 						$o->payment_mode=$pay_mode;
+					}else if($o->payment_mode == 5){
+						$pay_mode = 'Dubai Mall Online';
+						$o->payment_mode=$pay_mode;
 					}
 					if($o->customerName == null){
 						$custName="NA";
@@ -6482,6 +6501,11 @@ public function getCategorywiseSalesSummaryQuery($fromDate,$toDate,$category_id,
 						$o->payment_mode=$pay_mode;
 						$returncashAmt= 0;
 						$returncardAmt = $o->amount;
+					}else if($o->payment_mode == 5){
+						$pay_mode = 'Dubai Mall Online';
+						$o->payment_mode=$pay_mode;
+						$returncashAmt= 0;
+						$returncardAmt = 0;
 					}
 					if($o->customerName == null){
 						$custName="NA";

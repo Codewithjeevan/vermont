@@ -142,6 +142,12 @@
 
 	<div class="row">
 		<div class="col-md-8">
+			<label>Dubai Mall Online (@{{curr}})= @{{fixtIt(saleNoonCredit)}}</label>
+		</div>		
+	</div>
+
+	<div class="row">
+		<div class="col-md-8">
 			<label>@lang('billing.sale_return') (@{{curr}})= @{{fixtIt(saleReturn)}}</label>
 		</div>		
 	</div>
@@ -149,7 +155,7 @@
 	<div class="row">
 		<div class="col-md-8">
 			<label>@lang('billing.bal') (@{{curr}})= @{{fixtIt(Number(openingCash
-				)+Number(cashAmt)+Number(cardAmt)+Number(saleCredit)-Number(saleReturn))}}</label>
+				)+Number(cashAmt)+Number(cardAmt)+Number(saleCredit)+Number(saleNoonCredit)-Number(saleReturn))}}</label>
 			</div>		
 		</div>
 		

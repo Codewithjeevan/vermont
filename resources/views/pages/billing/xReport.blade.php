@@ -118,6 +118,12 @@
 
 					<div class="row">
 						<div class="col-md-8">
+							<label>Dubai Mall Online (@{{curr}}) = @{{fixtIt(reportXData.saleNoonCredit)}}</label>
+						</div>		
+					</div>
+
+					<div class="row">
+						<div class="col-md-8">
 							<label>@lang('billing.sale_return') (@{{curr}}) = @{{fixtIt(reportXData.saleReturn)}}</label>
 						</div>		
 					</div>
