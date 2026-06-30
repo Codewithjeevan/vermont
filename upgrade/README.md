@@ -60,7 +60,7 @@ Tooling note: invoke PHP via the full Laragon path (not system PATH) — see rep
 | [02](phase-02.md) | Laravel 5.4 → 5.5 (LTS) | `upgrade/phase-02-l55` | ✅ Done (5.5.50, smoke 5/5) |
 | [03](phase-03.md) | Laravel 5.5 → 5.6 → 5.7 → 5.8 | `upgrade/phase-03-l58` | ✅ Done (5.8.38 + Carbon 2, smoke 5/5) |
 | [04](phase-04.md) | Laravel 5.8 → 6 + Excel 2.1→3.1 | `upgrade/phase-04-l6` | ✅ Done (6.20.45 + LegacyExcel shim, 7/7) |
-| [05](phase-05.md) | Laravel 6 → 7 | `upgrade/phase-05-l7` | ⬜ Not started |
+| [05](phase-05.md) | Laravel 6 → 7 | `upgrade/phase-05-l7` | ✅ Done (7.30.7, tests 7/7) |
 | [06](phase-06.md) | Laravel 7 → 8 | `upgrade/phase-06-l8` | ⬜ Not started |
 | [07](phase-07.md) | Laravel 8 → 9 | `upgrade/phase-07-l9` | ⬜ Not started |
 | [08](phase-08.md) | Laravel 9 → 10 (`$dates`→`$casts`) | `upgrade/phase-08-l10` | ⬜ Not started |
