@@ -165,9 +165,10 @@ return [
 
         /*
          * Package Service Providers...
+         *
+         * Auto-discovered in Laravel 5.5+ (Tinker, Excel, Gravatar, Collective\Html,
+         * Toastr, DomPDF) — no longer listed manually.
          */
-        Laravel\Tinker\TinkerServiceProvider::class,
-
 
         /*
          * Application Service Providers...
@@ -178,16 +179,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        Maatwebsite\Excel\ExcelServiceProvider::class,
-
-
-        Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
-        Brian2694\Toastr\ToastrServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class,
-
         App\Providers\CommonProvider::class,
-      
+
 
     ],
 
@@ -238,13 +231,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
-
-        'Gravatar' => Thomaswelton\LaravelGravatar\Facades\Gravatar::class,
-        'Form' => Collective\Html\FormFacade::class,
-        'Html' => Collective\Html\HtmlFacade::class,
-        'Toastr'  => Brian2694\Toastr\Facades\Toastr::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
+        /*
+         * Auto-discovered package aliases (Laravel 5.5+): Gravatar, Form, Html,
+         * Toastr, Excel, PDF — registered via each package's composer extra.laravel.aliases.
+         */
 
         'Common' => App\Helpers\CommonHelper::class
 
