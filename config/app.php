@@ -159,7 +159,7 @@ return [
         /*
          * Package Service Providers...
          *
-         * Auto-discovered in Laravel 5.5+ (Tinker, Excel, Gravatar, Collective\Html,
+         * Auto-discovered in Laravel 5.5+ (Tinker, Excel, Collective\Html,
          * Toastr, DomPDF) — no longer listed manually.
          */
 
@@ -225,7 +225,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         /*
-         * Auto-discovered package aliases (Laravel 5.5+): Gravatar, Form, Html,
+         * Auto-discovered package aliases (Laravel 5.5+): Form, Html,
          * Toastr, Excel, PDF — registered via each package's composer extra.laravel.aliases.
          */
 
