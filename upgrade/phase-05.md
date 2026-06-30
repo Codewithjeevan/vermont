@@ -34,12 +34,19 @@ Official guide: https://laravel.com/docs/7.x/upgrade
 
 ## Verification
 
-- [ ] `route:list`, `config:cache`, `view:cache` succeed.
-- [ ] Characterization tests pass.
-- [ ] Smoke flows 1–16; **verify AJAX report date rendering** after Carbon serialization change.
+- [x] `route:list`, `config:cache`, `view:cache` succeed on Laravel 7.30.7 / PHP 7.4.33.
+- [x] Characterization tests pass — **7/7**.
+- [ ] Manual smoke 1–16 + AJAX report date rendering (Carbon serialization) — deferred to final pass.
 
 ## Exit criteria
 
 App on Laravel 7 / PHP 7.4. Merge, tag `v-l7`.
 
 ## Notes / deviations
+
+**DONE — Laravel 7.30.7 on PHP 7.4.33.**
+- `Handler.php`: `report()`/`render()` type-hints `Exception` → **`Throwable`** (L7 parent signature change); added `use Throwable;`.
+- **`Auth::routes()` now requires `laravel/ui`** in L7 (it moved out of core — correcting the earlier plan note). Installed `laravel/ui:^2.0`. Custom auth controllers/views unchanged.
+- `guzzlehttp/guzzle` → ^7; `laravelcollective/html` → ^6.2; framework ^7. Security advisories dropped 51 → 15.
+- First-party CORS: **not published** — app has no cross-origin usage and no CORS middleware wired.
+- Carbon ISO-8601 JSON serialization: no API resources in app; deep AJAX date-format checks deferred to final manual smoke.
