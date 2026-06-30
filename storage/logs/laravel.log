@@ -112014,3 +112014,47 @@ Did you mean one of these?
 #71 C:\\laragon\\www\\trul-vermont\\vendor\\phpunit\\phpunit\\phpunit(61): PHPUnit\\TextUI\\Command::main()
 #72 {main}
 "} 
+[2026-06-30 09:44:09] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at C:\\laragon\\www\\trul-vermont\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php:192)
+[stacktrace]
+#0 C:\\laragon\\www\\trul-vermont\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(118): Illuminate\\Log\\LogManager->resolve(NULL)
+#1 C:\\laragon\\www\\trul-vermont\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(98): Illuminate\\Log\\LogManager->get(NULL)
+#2 C:\\laragon\\www\\trul-vermont\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(543): Illuminate\\Log\\LogManager->driver()
+#3 C:\\laragon\\www\\trul-vermont\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(124): Illuminate\\Log\\LogManager->error('Class 'PHPExcel...', Array)
+#4 C:\\laragon\\www\\trul-vermont\\app\\Exceptions\\Handler.php(35): Illuminate\\Foundation\\Exceptions\\Handler->report(Object(Symfony\\Component\\Debug\\Exception\\FatalThrowableError))
+#5 C:\\laragon\\www\\trul-vermont\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(376): App\\Exceptions\\Handler->report(Object(Symfony\\Component\\Debug\\Exception\\FatalThrowableError))
+#6 C:\\laragon\\www\\trul-vermont\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(141): Illuminate\\Foundation\\Console\\Kernel->reportException(Object(Symfony\\Component\\Debug\\Exception\\FatalThrowableError))
+#7 C:\\laragon\\www\\trul-vermont\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2026-06-30 09:44:09] laravel.ERROR: Class 'PHPExcel_Shared_Font' not found {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'PHPExcel_Shared_Font' not found at C:\\laragon\\www\\trul-vermont\\config\\excel.php:182)
+[stacktrace]
+#0 C:\\laragon\\www\\trul-vermont\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\LoadConfiguration.php(72): require()
+#1 C:\\laragon\\www\\trul-vermont\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\LoadConfiguration.php(39): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->loadConfigurationFiles(Object(Illuminate\\Foundation\\Application), Object(Illuminate\\Config\\Repository))
+#2 C:\\laragon\\www\\trul-vermont\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(219): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->bootstrap(Object(Illuminate\\Foundation\\Application))
+#3 C:\\laragon\\www\\trul-vermont\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(320): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#4 C:\\laragon\\www\\trul-vermont\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#5 C:\\laragon\\www\\trul-vermont\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#6 {main}
+"} 
+[2026-06-30 09:44:09] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at C:\\laragon\\www\\trul-vermont\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php:192)
+[stacktrace]
+#0 C:\\laragon\\www\\trul-vermont\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(118): Illuminate\\Log\\LogManager->resolve(NULL)
+#1 C:\\laragon\\www\\trul-vermont\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(98): Illuminate\\Log\\LogManager->get(NULL)
+#2 C:\\laragon\\www\\trul-vermont\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(543): Illuminate\\Log\\LogManager->driver()
+#3 C:\\laragon\\www\\trul-vermont\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(124): Illuminate\\Log\\LogManager->error('Class 'PHPExcel...', Array)
+#4 C:\\laragon\\www\\trul-vermont\\app\\Exceptions\\Handler.php(35): Illuminate\\Foundation\\Exceptions\\Handler->report(Object(Symfony\\Component\\Debug\\Exception\\FatalThrowableError))
+#5 C:\\laragon\\www\\trul-vermont\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(376): App\\Exceptions\\Handler->report(Object(Symfony\\Component\\Debug\\Exception\\FatalThrowableError))
+#6 C:\\laragon\\www\\trul-vermont\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(141): Illuminate\\Foundation\\Console\\Kernel->reportException(Object(Symfony\\Component\\Debug\\Exception\\FatalThrowableError))
+#7 C:\\laragon\\www\\trul-vermont\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2026-06-30 09:44:09] laravel.ERROR: Class 'PHPExcel_Shared_Font' not found {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'PHPExcel_Shared_Font' not found at C:\\laragon\\www\\trul-vermont\\config\\excel.php:182)
+[stacktrace]
+#0 C:\\laragon\\www\\trul-vermont\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\LoadConfiguration.php(72): require()
+#1 C:\\laragon\\www\\trul-vermont\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\LoadConfiguration.php(39): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->loadConfigurationFiles(Object(Illuminate\\Foundation\\Application), Object(Illuminate\\Config\\Repository))
+#2 C:\\laragon\\www\\trul-vermont\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(219): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->bootstrap(Object(Illuminate\\Foundation\\Application))
+#3 C:\\laragon\\www\\trul-vermont\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(320): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#4 C:\\laragon\\www\\trul-vermont\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#5 C:\\laragon\\www\\trul-vermont\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#6 {main}
+"} 
