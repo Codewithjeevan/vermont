@@ -65,7 +65,7 @@ Tooling note: invoke PHP via the full Laragon path (not system PATH) — see rep
 | [07](phase-07.md) | Laravel 8 → 9 | `upgrade/phase-07-l9` | ✅ Done (9.52.21 / PHP 8.1, tests 7/7) |
 | [08](phase-08.md) | Laravel 9 → 10 (`$dates`→`$casts`) | `upgrade/phase-08-l10` | ✅ Done (10.50.2, 17 models cast, 7/7) |
 | [09](phase-09.md) | Laravel 10 → 11 (structural skeleton) | `upgrade/phase-09-l11` | ✅ Done (11.54.0 / PHP 8.2, kept skeleton, 7/7) |
-| [10](phase-10.md) | Laravel 11 → 12 | `upgrade/phase-10-l12` | ⬜ Not started |
+| [10](phase-10.md) | Laravel 11 → 12 | `upgrade/phase-10-l12` | ✅ Done (12.62.0 / PHP 8.2, 7/7) |
 | [11](phase-11.md) | Optimization & Security Hardening | `upgrade/phase-11-hardening` | ⬜ Not started |
 
 Status legend: ⬜ Not started · 🟡 In progress · ✅ Done · ⛔ Blocked
