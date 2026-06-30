@@ -44,3 +44,17 @@ Three minor hops, **one sub-commit each**. Guides:
 App on Laravel 5.8 / PHP 7.2. Merge, tag `v-l58`.
 
 ## Notes / deviations
+
+**DONE** — all three sub-steps green (smoke 5/5 each):
+- 5.6.40 — added `config/logging.php` (required in 5.6); removed old `log`/`log_level` keys from
+  `config/app.php`; restored `storage/framework/views/.gitignore` (dir had been deleted by git when
+  previously-tracked compiled views were removed → "Please provide a valid cache path").
+- 5.7.29 — clean, no code changes.
+- 5.8.38 — Carbon 1 → **Carbon 2** pulled automatically; app boots fine.
+
+**Cache TTL minutes→seconds (5.8):** N/A — `Cache::put`/`remember` has **0 usages** in the app.
+
+**Recurring gotcha:** after `composer update --no-scripts`, delete `bootstrap/cache/*.php` then run
+`artisan package:discover` (stale manifest otherwise throws "Carbon\Laravel\ServiceProvider not found").
+
+**Carbon 2 deep date-format checks** (reports/AJAX) deferred to the final manual smoke pass.

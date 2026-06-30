@@ -58,7 +58,7 @@ Tooling note: invoke PHP via the full Laragon path (not system PATH) — see rep
 | [00](phase-00.md) | Foundation & Safety Net | `upgrade/phase-00-foundation` | 🟡 Automated done — manual smoke pending |
 | [01](phase-01.md) | PHP 5.6 → 7.0 readiness (stay L5.4) | `upgrade/phase-01-php7` | ✅ Done (PHP 7.4, code clean) |
 | [02](phase-02.md) | Laravel 5.4 → 5.5 (LTS) | `upgrade/phase-02-l55` | ✅ Done (5.5.50, smoke 5/5) |
-| [03](phase-03.md) | Laravel 5.5 → 5.6 → 5.7 → 5.8 | `upgrade/phase-03-l58` | ⬜ Not started |
+| [03](phase-03.md) | Laravel 5.5 → 5.6 → 5.7 → 5.8 | `upgrade/phase-03-l58` | ✅ Done (5.8.38 + Carbon 2, smoke 5/5) |
 | [04](phase-04.md) | Laravel 5.8 → 6 + Excel 2.1→3.1 | `upgrade/phase-04-l6` | ⬜ Not started |
 | [05](phase-05.md) | Laravel 6 → 7 | `upgrade/phase-05-l7` | ⬜ Not started |
 | [06](phase-06.md) | Laravel 7 → 8 | `upgrade/phase-06-l8` | ⬜ Not started |
