@@ -13,6 +13,5 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Default scaffolding `/user` route removed during the upgrade (unused, and its
+// closure blocked route:cache). Add API routes here as controller actions.
