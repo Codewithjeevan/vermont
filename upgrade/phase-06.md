@@ -33,12 +33,21 @@ Official guide: https://laravel.com/docs/8.x/upgrade
 
 ## Verification
 
-- [ ] `route:list`, `config:cache`, `view:cache` succeed.
-- [ ] Characterization tests pass.
-- [ ] Smoke flows 1–16; verify **pagination** styling and all controller route bindings resolve.
+- [x] `route:list`, `config:cache`, `view:cache` succeed on Laravel 8.83.29 / PHP 7.4.33.
+- [x] Characterization tests pass — **7/7**.
+- [ ] Manual smoke 1–16 + pagination styling — deferred to final pass.
 
 ## Exit criteria
 
 App on Laravel 8 / PHP 7.4. Merge, tag `v-l8`.
+
+## Notes / deviations
+
+**DONE — Laravel 8.83.29 on PHP 7.4.33.**
+- `AppServiceProvider::boot()`: added `Paginator::useBootstrap()` (L8 default became Tailwind; app uses Bootstrap 3).
+- `app/Http/Kernel.php`: `CheckForMaintenanceMode` → **`PreventRequestsDuringMaintenance`**.
+- **Route namespace:** `RouteServiceProvider` already keeps `$namespace = 'App\Http\Controllers'` + explicit `mapWebRoutes`/`mapApiRoutes`, so string controller actions still resolve — no route changes needed. Models kept in `App\`.
+- `laravel/ui` → ^3.0; `barryvdh/laravel-dompdf` → ^1.0; `laravel/tinker` → ^2.5; `phpunit` → ^9.3, mockery ^1.3.1.
+- Migrated `phpunit.xml` to the PHPUnit 9 schema (`--migrate-configuration`). Security advisories 15 → 13.
 
 ## Notes / deviations
