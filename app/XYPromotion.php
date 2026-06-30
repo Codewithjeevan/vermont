@@ -11,7 +11,7 @@ class XYPromotion extends Model
 		"x_item_id", "x_quantity","y_item_id","y_quantity","prmo_from","prmo_to"
 		);
 
-	protected $dates = array('prmo_from','prmo_to');
+	protected $casts = ['prmo_from' => 'datetime', 'prmo_to' => 'datetime'];
 
 	public function item(){
 		return $this->hasOne("App\Item", "id", "y_item_id");

@@ -9,7 +9,7 @@ class IssueStock extends Model
 {
 	protected $fillable = array('slip_date', 'approx_value_of');
 
-	protected $dates = array('slip_date');
+	protected $casts = ['slip_date' => 'datetime'];
 
 	public function setSlipDateAttribute($value){
 		$this->attributes["slip_date"] =  Carbon::parse($value);

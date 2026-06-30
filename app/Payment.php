@@ -11,9 +11,7 @@ class Payment extends Model
 		"payment_date", "supplier_id", "bill_no", "mode", "bank_id", "ch_no", "ch_date", "paid_amount", "remark"
 		);
 
-	protected $dates = array(
-		"payment_date", "ch_date"
-		);
+	protected $casts = ['payment_date' => 'datetime', 'ch_date' => 'datetime'];
 
 	public function getPaymentDateAttribute($value){
 		return Carbon::parse($value)->format("m/d/Y");

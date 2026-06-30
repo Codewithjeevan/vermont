@@ -10,9 +10,7 @@ class PurchaseReturn extends Model
 		'return_date', 'supplier_id', 'supplier_billno', 'return_through', 'subTotal', 'disAmount','extraDiscount', 'billAmount'
 		); 
 
-	protected $dates = array(
-		'return_date'
-		);
+	protected $casts = ['return_date' => 'datetime'];
 
 	public function _supplier(){
 		return $this->hasOne("App\Supplier","id", "supplier_id");

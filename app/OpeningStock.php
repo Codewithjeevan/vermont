@@ -12,7 +12,7 @@ class OpeningStock extends Model
 
 	protected $fillable = array('open_stock_date','itemId','openingStock','unit'); 
 
-	protected $dates = array('open_stock_date');
+	protected $casts = ['open_stock_date' => 'datetime'];
 
 	public function setOpenStockDateAttribute($value){
 		if($value!=null){

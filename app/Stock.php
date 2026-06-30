@@ -10,9 +10,7 @@ class Stock extends Model
 	protected $fillable = ["item_id", "type", "type_id","stock", "date"];
 	public $timestamps = false;
 
-	protected $dates = array(
-		'date'
-		);
+	protected $casts = ['date' => 'datetime'];
 
 	public function setDateAttribute($value){
 		if($value!=null){

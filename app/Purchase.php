@@ -11,9 +11,7 @@ class Purchase extends Model
 		'mrn_date', 'po_no', 'supplier_id', 'supplier_billdate', 'supplierBillNo', 'purchase', 'receivedBy', 'subTotal','vat_amt', 'disAmount','extraDiscount', 'billAmount'
 	); 
 
-	protected $dates = array(
-		'mrn_date', 'expiryDate', 'supplier_billdate'
-	);
+	protected $casts = ['mrn_date' => 'datetime', 'expiryDate' => 'datetime', 'supplier_billdate' => 'datetime'];
 
 
 	public function purchasedItems(){

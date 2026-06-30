@@ -10,9 +10,7 @@ class PurchasedItem extends Model
       "purchase_id", "item_id", "qty", "unit", "costPrise", "expiryDate", "discount", "totalDiscount", "amount","cp_vat"
       );
 
-    protected $dates = array(
-      "expiryDate"
-      );
+    protected $casts = ['expiryDate' => 'datetime'];
 
     public function item(){
         return $this->hasOne("App\Item", "id", "item_id");	

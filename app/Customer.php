@@ -11,7 +11,7 @@ class Customer extends Model
 		'title', 'name', 'spouse', 'birthday', 'anniversary', 'address', 'phone', 'mobile', 'fax', 'email', 'city', 'gender','age_group','prefered_mode','prefered_language','nationality','countryOfResidence','type','issuedBy','number','firstName','lastName'
 		);
 
-	protected $dates = array('birthday', 'anniversary');
+	protected $casts = ['birthday' => 'datetime', 'anniversary' => 'datetime'];
 
 	public function setPhoneAttribute($value){
 		if(empty($value)){

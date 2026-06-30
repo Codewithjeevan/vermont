@@ -9,7 +9,7 @@ class StockAdjustment extends Model
 {
 	protected $fillable = array('stock_adjustment_date','user_id');
 
-	protected $dates = array('stock_adjustment_date');
+	protected $casts = ['stock_adjustment_date' => 'datetime'];
 
 	public function setStockAdjustmentDateAttribute($value){
 		$this->attributes["stock_adjustment_date"] =  Carbon::parse($value);
