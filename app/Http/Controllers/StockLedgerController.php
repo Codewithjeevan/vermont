@@ -150,7 +150,7 @@ class StockLedgerController extends Controller
 	 				$exportName = 'StockLedgerReport'.$format; 
 
 
-	 				Excel::create($exportName, function ($excel) use(
+	 				\App\Legacy\LegacyExcel::create($exportName, function ($excel) use(
 	 					$purchases,
 	 					$fromDate,
 	 					$toDate) {

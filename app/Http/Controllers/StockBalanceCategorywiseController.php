@@ -165,7 +165,7 @@ class StockBalanceCategorywiseController extends Controller
 				$exportName = 'StockBalanceReport-'.$format; 
 
 
-				Excel::create($exportName, function ($excel) 
+				\App\Legacy\LegacyExcel::create($exportName, function ($excel) 
 					use($categoryResponse,
 						$totalCP,
 						$totalSP,

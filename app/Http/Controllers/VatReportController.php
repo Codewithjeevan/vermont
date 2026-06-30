@@ -287,7 +287,7 @@ public function index(Request $request){
 				$exportName = 'VatReport-'.$format; 
 
 
-				Excel::create($exportName, function ($excel) use($purchases,$totalCostPrise,$totalPurchaseQty,$totalPurchaseVat,$totalSalePrice,$totalSaleQty,$totalsalevat,$fromDate,$toDate,$currency) {
+				\App\Legacy\LegacyExcel::create($exportName, function ($excel) use($purchases,$totalCostPrise,$totalPurchaseQty,$totalPurchaseVat,$totalSalePrice,$totalSaleQty,$totalsalevat,$fromDate,$toDate,$currency) {
 
 					$excel->sheet('VatReport', function ($sheet) use($purchases,$totalCostPrise,$totalPurchaseQty,$totalPurchaseVat,$totalSalePrice,$totalSaleQty,$totalsalevat,$fromDate,$toDate,$currency) {	
 

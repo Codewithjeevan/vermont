@@ -161,7 +161,7 @@ class SalesmanReportController extends Controller
 	 				$timestamp = $carbon->timestamp;
 	 				$format = $carbon->format($this->rDateFormat);
 	 				$exportName = 'SalesmanReport-'.$format; 
-	 				Excel::create($exportName, function ($excel) 
+	 				\App\Legacy\LegacyExcel::create($exportName, function ($excel) 
 	 					use($purchases,
 	 						$total,
 	 						$totalQty,

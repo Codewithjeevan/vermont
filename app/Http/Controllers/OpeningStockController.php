@@ -369,7 +369,7 @@ public function exportToXls(){
             $format = $carbon->format('Y-m-d');
             $exportName = 'OpeningStock'.$format;
 
-            Excel::create($exportName, function ($excel) use($dataList){
+            \App\Legacy\LegacyExcel::create($exportName, function ($excel) use($dataList){
 
                 $excel->sheet('OpeningStock', function ($sheet) use($dataList) {
 
@@ -492,7 +492,7 @@ public function uploadFile(Request $request){
         } else {
             $file->move(storage_path().'/import', $name); 
         }
-        $excelData = \Excel::load(storage_path().'/import/'. $name, function($reader) {})->get();
+        $excelData = \App\Legacy\LegacyExcel::load(storage_path().'/import/'. $name, function($reader) {})->get();
 
 
         foreach ($excelData as $e) {

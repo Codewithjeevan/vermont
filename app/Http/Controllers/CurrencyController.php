@@ -140,7 +140,7 @@ class CurrencyController extends Controller
            $format = $carbon->format('Y-m-d');
            $exportName = 'currency'.$format; 
 
-           Excel::create($exportName, function ($excel) use ($arrCurrency) {
+           \App\Legacy\LegacyExcel::create($exportName, function ($excel) use ($arrCurrency) {
 
             $excel->sheet('currency', function ($sheet) use ($arrCurrency) {
 

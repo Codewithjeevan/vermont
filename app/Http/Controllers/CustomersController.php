@@ -328,7 +328,7 @@ class CustomersController extends Controller
         $format = $carbon->format('Y-m-d');
         $exportName = 'Customer'.$format;
 
-        Excel::create($exportName, function ($excel) use($arrCustomers){
+        \App\Legacy\LegacyExcel::create($exportName, function ($excel) use($arrCustomers){
 
           $excel->sheet('Customer', function ($sheet) use($arrCustomers){
 

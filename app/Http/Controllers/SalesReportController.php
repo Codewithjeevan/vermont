@@ -178,7 +178,7 @@ class SalesReportController extends Controller
 				$timestamp = $carbon->timestamp;
 				$format = $carbon->format($this->rDateFormat);
 				$exportName = 'CustomerSales-'.$format; 
-				Excel::create($exportName, function ($excel) 
+				\App\Legacy\LegacyExcel::create($exportName, function ($excel) 
 					use($purchases,
 						$total,
 						$totalDis,
@@ -616,7 +616,7 @@ public function getLedgerCSummary(Request $request){
 			$timestamp = $carbon->timestamp;
 			$format = $carbon->format($this->rDateFormat);
 			$exportName = 'CustomerSalesSummary-'.$format; 
-			Excel::create($exportName, function ($excel) 
+			\App\Legacy\LegacyExcel::create($exportName, function ($excel) 
 				use($purchases,
 					$total,
 					$fromDate,
@@ -828,7 +828,7 @@ public function getLedgerCSummary(Request $request){
 			$timestamp = $carbon->timestamp;
 			$format = $carbon->format($this->rDateFormat);
 			$exportName = 'SalesProfit-'.$format; 
-			Excel::create($exportName, function ($excel) 
+			\App\Legacy\LegacyExcel::create($exportName, function ($excel) 
 				use($purchases,
 					$fromDate,
 					$toDate,
@@ -1217,7 +1217,7 @@ public function getLedgerCatCashMemo(Request $request){
 			$timestamp = $carbon->timestamp;
 			$format = $carbon->format($this->rDateFormat);
 			$exportName = 'CategoryCashMemo-'.$format; 
-			Excel::create($exportName, function ($excel) 
+			\App\Legacy\LegacyExcel::create($exportName, function ($excel) 
 				use($purchases,
 					$totalDis,
 					$totalLoyDis,
@@ -1545,7 +1545,7 @@ public function exportToSalesSummary(Request $request){
 			$timestamp = $carbon->timestamp;
 			$format = $carbon->format($this->rDateFormat);
 			$exportName = 'SalesSummary-'.$format; 
-			Excel::create($exportName, function ($excel) 
+			\App\Legacy\LegacyExcel::create($exportName, function ($excel) 
 				use($purchases,
 					$fromDate,
 					$toDate,
@@ -1775,7 +1775,7 @@ public function exportToCRMReport(Request $request){
 			$timestamp = $carbon->timestamp;
 			$format = $carbon->format($this->rDateFormat);
 			$exportName = 'CRMRexport-'.$format; 
-			Excel::create($exportName, function ($excel) 
+			\App\Legacy\LegacyExcel::create($exportName, function ($excel) 
 				use($purchases,
 
 					$fromDate,
@@ -2262,7 +2262,7 @@ public function getLedgerSalesReturn(Request $request){
 				$timestamp = $carbon->timestamp;
 				$format = $carbon->format($this->rDateFormat);
 				$exportName = 'SalesReturn-'.$format; 
-				Excel::create($exportName, function ($excel) 
+				\App\Legacy\LegacyExcel::create($exportName, function ($excel) 
 					use($itemList,
 						$total,
 						$totalCash,
@@ -2681,7 +2681,7 @@ public function getSalesreturnQuery($fromDate,$toDate){
     			$timestamp = $carbon->timestamp;
     			$format = $carbon->format($this->rDateFormat);
     			$exportName = 'ItemwiseSales-'.$format; 
-    			Excel::create($exportName, function ($excel) 
+    			\App\Legacy\LegacyExcel::create($exportName, function ($excel) 
     				use($purchases,
     					$total,
     					$totalRate,
@@ -3036,7 +3036,7 @@ public function getItemWiseSalesReportQuery($item_id,$fromDate,$toDate){
 				$timestamp = $carbon->timestamp;
 				$format = $carbon->format($this->rDateFormat);
 				$exportName = 'QuantitywiseSales-'.$format; 
-				Excel::create($exportName, function ($excel) 
+				\App\Legacy\LegacyExcel::create($exportName, function ($excel) 
 					use($itemList,
 						$fromDate,
 						$toDate,
@@ -3377,7 +3377,7 @@ public function getQuantitySalesQuery($fromDate,$toDate){
 			$timestamp = $carbon->timestamp;
 			$format = $carbon->format($this->rDateFormat);
 			$exportName = 'QuantitywiseSales-'.$format; 
-			Excel::create($exportName, function ($excel) 
+			\App\Legacy\LegacyExcel::create($exportName, function ($excel) 
 				use($purchases,
 					$fromDate,
 					$toDate) {
@@ -3537,7 +3537,7 @@ public function getQuantitySalesQuery($fromDate,$toDate){
 			$timestamp = $carbon->timestamp;
 			$format = $carbon->format($this->rDateFormat);
 			$exportName = 'X-Sales-'.$format; 
-			Excel::create($exportName, function ($excel) 
+			\App\Legacy\LegacyExcel::create($exportName, function ($excel) 
 				use($purchases,
 					$fromDate,
 					$toDate,
@@ -3793,7 +3793,7 @@ public function getQuantitySalesQuery($fromDate,$toDate){
 			$timestamp = $carbon->timestamp;
 			$format = $carbon->format($this->rDateFormat);
 			$exportName = 'PromotionReport-'.$format; 
-			Excel::create($exportName, function ($excel)
+			\App\Legacy\LegacyExcel::create($exportName, function ($excel)
 				use($promotions_temp,
 					$total,
 					$totalQty,
@@ -4300,7 +4300,7 @@ public function exportToLoyalty(Request $request){
 		$timestamp = $carbon->timestamp;
 		$format = $carbon->format($this->rDateFormat);
 		$exportName = 'LoyaltyReport-'.$format; 
-		Excel::create($exportName, function ($excel)
+		\App\Legacy\LegacyExcel::create($exportName, function ($excel)
 			use($purchases,
 				$total,
 				$fromDate,
@@ -4525,7 +4525,7 @@ public function getLedgerSalesPack(Request $request){
 	 				$timestamp = $carbon->timestamp;
 	 				$format = $carbon->format($this->rDateFormat);
 	 				$exportName = 'SALESPACT-'.$format; 
-	 				Excel::create($exportName, function ($excel) 
+	 				\App\Legacy\LegacyExcel::create($exportName, function ($excel) 
 	 					use($arrData,
 	 						$fromDate,
 	 						$toDate,
@@ -5277,7 +5277,7 @@ public function exportToCategorywiseSalesSummary(Request $request){
 			$timestamp = $carbon->timestamp;
 			$format = $carbon->format($this->rDateFormat);
 			$exportName = 'BrandwiseSalesSummary-'.$format; 
-			Excel::create($exportName, function ($excel) 
+			\App\Legacy\LegacyExcel::create($exportName, function ($excel) 
 				use($purchases,
 					$fromDate,
 					$toDate,$category_id,$sub_category_id,
@@ -5724,7 +5724,7 @@ public function getCategorywiseSalesSummaryQuery($fromDate,$toDate,$category_id,
 				$timestamp = $carbon->timestamp;
 				$format = $carbon->format($this->rDateFormat);
 				$exportName = 'taxRefund-'.$format; 
-				Excel::create($exportName, function ($excel) 
+				\App\Legacy\LegacyExcel::create($exportName, function ($excel) 
 					use($purchases,
 						$totalDis,
 						$totalLoyDis,
@@ -6102,7 +6102,7 @@ public function getCategorywiseSalesSummaryQuery($fromDate,$toDate,$category_id,
 				$timestamp = $carbon->timestamp;
 				$format = $carbon->format($this->rDateFormat);
 				$exportName = 'BrandwiseSalesandSalesReturn-'.$format; 
-				Excel::create($exportName, function ($excel) 
+				\App\Legacy\LegacyExcel::create($exportName, function ($excel) 
 					use($purchases,$saletotal,$saletotalVat,$saletotalDiscount,$saletotalLoyDis,$returntotal,$returntotalVat,$returntotalDiscount,$returntotalLoyaltyDiscount,
 						$fromDate,
 						$toDate,$category_id,$sub_category_id,
@@ -6769,7 +6769,7 @@ public function exportToCustomerClassificationreport(Request $request){
 			$timestamp = $carbon->timestamp;
 			$format = $carbon->format($this->rDateFormat);
 			$exportName = 'CustomerClassification-'.$format; 
-			Excel::create($exportName, function ($excel) 
+			\App\Legacy\LegacyExcel::create($exportName, function ($excel) 
 				use($purchases,
 					$totalPurchase,
 					$fromDate,

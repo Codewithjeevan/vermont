@@ -165,7 +165,7 @@ class SalesmanController extends Controller
                 $timestamp = $carbon->timestamp;
                 $format = $carbon->format('Y-m-d');
                 $exportName = 'Salesman'.$format; 
-                Excel::create($exportName, function ($excel) {
+                \App\Legacy\LegacyExcel::create($exportName, function ($excel) {
 
                     $excel->sheet('Salesman', function ($sheet) {
 

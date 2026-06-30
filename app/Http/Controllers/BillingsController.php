@@ -3025,7 +3025,7 @@ public function exportTo(Request $Request){
            $timestamp = $carbon->timestamp;
            $format = $carbon->format($this->rDateFormat);
            $exportName = 'DeletedBills-'.$format; 
-           Excel::create($exportName, function ($excel) use($arrDeletedBills){
+           \App\Legacy\LegacyExcel::create($exportName, function ($excel) use($arrDeletedBills){
 
             $excel->sheet('DeletedBills', function ($sheet) use($arrDeletedBills){
 
