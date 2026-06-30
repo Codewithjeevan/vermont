@@ -10,10 +10,10 @@ class Privilege extends Model
 	public $timestamps = false;
 
 	public function role(){
-		return $this->belongsToMany("App/Role");
+		return $this->belongsToMany(\App\Role::class);
 	}
 
 	public function resource(){
-		return $this->belongsToMany("App/Resource");
+		return $this->belongsToMany(\App\Resource::class);
 	}
 }

@@ -9,3 +9,4 @@ Homestead.yaml
 .env
 .svn
 /resources/assets/plugins
+/upgrade/_backups/
