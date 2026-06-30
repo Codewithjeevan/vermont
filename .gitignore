@@ -11,4 +11,5 @@ Homestead.yaml
 /resources/assets/plugins
 /upgrade/_backups/
 /.phpunit.result.cache
+/.phpunit.cache
 /storage/logs/*.log
