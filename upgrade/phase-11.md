@@ -79,3 +79,34 @@ L12 / PHP 8.2, no interpolated SQL, TLS verified, curl→Http migrated, caches g
 Merge, tag **`v12-release`**.
 
 ## Notes / deviations
+
+### ✅ Completed (safe, verified)
+- **composer.json** reformatted; `nekhbet/laravel-collective-html` pinned `^1.0`. **Security advisories 51 → 0.**
+- **Closure routes → `PageController`** (`/home`, `404`, `500`, `error/{page}`, `test`) and removed the
+  unused api `/user` closure → **`php artisan route:cache` now works** (was blocked by closures).
+- **SQLi parameterized (contained, tested):**
+  - `CustomersController` birthday/anniversary methods — whitelisted the `$type` **column name**
+    (`birthday`/`anniversary`) and bound `$filter`/`$todayDate`/`$month`/`$date` values.
+  - `ItemsController::searchItem` / `searchBarcode` — bound all `$request`-sourced values in the
+    `CASE WHEN` `whereRaw` clauses (exact logic preserved).
+- **Full optimize cache cycle verified:** `config:cache` + `route:cache` + `view:cache` + `optimize`
+  all succeed on L12. Test suite 9/9.
+
+### ⚠️ Remaining hardening — REQUIRES staged testing against real data/endpoints (NOT done blind)
+These are genuine improvements but cannot be verified without the live DB/integration, and doing them
+blind risks regressions (violates the "bug-free" requirement). Recommend a dedicated, separately-tested
+pass:
+1. **Report-controller raw SQL audit:** hundreds of interpolated `DB::select("... '$fromDate' ...")`
+   across `SalesReportController` (~4400 lines, 21 reports), `VatReportController`,
+   `CashierReportController`, `DashboardController`, `PurchaseReportController`, etc. Each must be
+   converted to bindings and its output diffed against a baseline export — a large, data-dependent task.
+2. **Re-enable TLS + curl→Http client:** `CURLOPT_SSL_VERIFYPEER=0` in `BillingsController` (Planet tax
+   API ×3), `MailController` (SMS ×2), `WelcomeController` (licence). Flipping these on **live
+   payment/SMS/licence flows** must be tested against each endpoint (a self-signed cert would break
+   login/billing), so it should be staged, not done blind.
+3. **N+1 eager loading** — needs query profiling (Debugbar/`DB::listen`) against real data.
+
+### Deferred to the separate "Frontend & Blade Modernization" plan
+- `laravel/helpers` bridge kept (no global `array_*`/`str_*` usage found in `app/`, but a view might use
+  one — left in place to avoid risk).
+- `{{{ }}}` Blade normalization (renders fine on L12 — cosmetic only).
