@@ -10,7 +10,7 @@ class zSales extends Model
 	protected $fillable = array(
 		"day_close");
 
-	protected $dates = array('day_close');	
+	protected $casts = ['day_close' => 'datetime'];	
 
 	public function setDayCloseAttribute($value){
 		$this->attributes["day_close"] = Carbon::parse($value);	 

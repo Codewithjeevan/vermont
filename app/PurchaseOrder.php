@@ -9,7 +9,7 @@ class PurchaseOrder extends Model
 {
 	protected $fillable = array('purchase_order_date', "supplier_id");
 
-	protected $dates = array('purchase_order_date');
+	protected $casts = ['purchase_order_date' => 'datetime'];
 
 	public function setPurchaseOrderDateAttribute($value){
 		$this->attributes["purchase_order_date"] = Carbon::parse($value);	 

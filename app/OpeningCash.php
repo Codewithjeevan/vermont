@@ -11,7 +11,7 @@ class OpeningCash extends Model
 
 	protected $fillable = array('open_cash_date','opening_amt','user_id'); 
 
-	protected $dates = array('open_cash_date');
+	protected $casts = ['open_cash_date' => 'datetime'];
 
 	public function setOpeningCashDateAttribute($value){
 		$this->attributes["open_cash_date"] = Carbon::parse($value);	 

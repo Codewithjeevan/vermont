@@ -9,9 +9,7 @@ class Item extends Model
 	protected $fillable = array(
 		'productCode','serial_number', 'category', 'barcode', 'itemName','itemNameArabic', 'costPrise', 'salePrise','wholesale_salePrise','vat','cp_vat','description', 'unit', 'stock', 'min', 'max','expiryChk','packageChk','item_with_box','expiry_date', "image","promotion_from","promotion_to","promotion_price","x_y_prmoChk"
 		);
-	protected $dates = array(
-		'expiry_date','promotion_from','promotion_to'
-		);
+	protected $casts = ['expiry_date' => 'datetime', 'promotion_from' => 'datetime', 'promotion_to' => 'datetime'];
 
 	
 

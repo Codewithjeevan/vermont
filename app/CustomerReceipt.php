@@ -10,7 +10,7 @@ class CustomerReceipt extends Model
 {
 	protected $fillable = array("id","receipt_date","customer_id","against_bill_id","pay_mode","cheque_draft_no","cheque_draft_date","bank_id","dep_bank","receipt_amt","remark");
 
-	protected $dates = array("receipt_date","cheque_draft_date");
+	protected $casts = ['receipt_date' => 'datetime', 'cheque_draft_date' => 'datetime'];
 
 	public function setReceiptDateAttribute($value){
 		$this->attributes["receipt_date"] =  Carbon::parse($value);
