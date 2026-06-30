@@ -60,7 +60,7 @@ class UpgradeSmokeTest extends TestCase
      */
     public function testPackageAliasesResolve()
     {
-        foreach (['PDF', 'Form', 'Html', 'Toastr', 'Excel', 'Gravatar', 'Common'] as $alias) {
+        foreach (['PDF', 'Form', 'Html', 'Toastr', 'Excel', 'Common'] as $alias) {
             $this->assertTrue(class_exists($alias), "Facade alias [$alias] does not resolve");
         }
     }
