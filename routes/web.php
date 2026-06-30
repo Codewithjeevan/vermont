@@ -31,23 +31,15 @@ Route::post('/PlanetAccessToken','WelcomeController@PlanetAccessToken');
 
 
 /** Test Route */
-Route::get('test', function () {
-	abort(500);
-});
+Route::get('test', 'PageController@test');
 
-Route::get('404', function () {
-	return View('errors.404');
-});
+Route::get('404', 'PageController@show404');
 
-Route::get('500', function () {
-	return View('errors.500');
-});
+Route::get('500', 'PageController@show500');
 
 
 
-Route::get('error/{page}', function ($page) {
-	return View('errors.401', ['page' => $page]);
-});
+Route::get('error/{page}', 'PageController@showError');
 
 
 /** Auth Routes */
@@ -55,18 +47,7 @@ Auth::routes();
 
 
 /** Home Route */
-Route::get('/home', function(){
-	if(Auth::user()->roleId==3){
-		if(Common::can_billscreen_view('billing','billscreen') == 2){
-			return redirect('billing/billing2');
-		}else{
-			return redirect('billing/billing');
-		}
-		
-	}else{
-		return redirect('dashboard/dashboard');
-	}
-});
+Route::get('/home', 'PageController@home');
 
 Route::get("common/add/{controller}",'CommonController@add');
 

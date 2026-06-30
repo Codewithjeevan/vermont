@@ -742,18 +742,22 @@ public function getExportCustomerMasterDetailsAsPerFilter($strFilter,$intPoints,
 public function getBirthdayAnivarsaryData($searchkey,$todayDate,$filter,$type ){
 
   try{
+    $type = in_array($type, ['birthday', 'anniversary'], true) ? $type : 'birthday';
+    $filter = (int) $filter;
+    $rawCondition = "CASE WHEN ? = 1 THEN MONTH($type) = MONTH(?) AND  DAY($type) = DAY(?) AND YEAR($type) < YEAR(?) ELSE true END";
+    $rawBindings = [$filter, $todayDate, $todayDate, $todayDate];
     if(trim($searchkey)==''){
-      return Customer::where("$type","<>", null)
-      ->whereRaw("CASE WHEN $filter = 1 THEN MONTH($type) = MONTH('$todayDate') AND  DAY($type) = DAY('$todayDate') AND YEAR($type) < YEAR('$todayDate') ELSE true END")
+      return Customer::where($type,"<>", null)
+      ->whereRaw($rawCondition, $rawBindings)
       ->paginate(25); 
 
     }else{
 
-      return Customer::where("$type","<>", null)
-      ->whereRaw("CASE WHEN $filter = 1 THEN MONTH($type) = MONTH('$todayDate') AND  DAY($type) = DAY('$todayDate') AND YEAR($type) < YEAR('$todayDate') ELSE true END")
+      return Customer::where($type,"<>", null)
+      ->whereRaw($rawCondition, $rawBindings)
       ->where(function($query) use($searchkey,$type){
         $query->orWhere('name','LIKE', '%'.$searchkey.'%');
-        $query->orWhere("$type",'LIKE', '%'.$searchkey.'%');
+        $query->orWhere($type,'LIKE', '%'.$searchkey.'%');
         $query->orWhere('email','LIKE', '%'.$searchkey.'%');
         $query->orWhere('mobile','LIKE', '%'.$searchkey.'%');
       })
@@ -775,12 +779,15 @@ public function getBirthdayData($searchkey,$todayDate,$date1,$month1,$date2,$mon
  
   try
   {
+    $type = in_array($type, ['birthday', 'anniversary'], true) ? $type : 'birthday';
+    $rawLower = "MONTH($type) >= ? AND DAY($type) >= ? AND YEAR($type) < YEAR(?)";
+    $rawUpper = "MONTH($type) <= ? AND DAY($type) <= ? AND YEAR($type) < YEAR(?)";
     if(trim($searchkey)==''){
       
     
-       return Customer::where("$type","<>", null)
-      ->whereRaw("MONTH($type) >=$month1 AND DAY($type) >= $date1 AND YEAR($type) < YEAR('$todayDate')")
-      ->whereRaw("MONTH($type)<=$month2 AND DAY($type) <=$date2 AND YEAR($type) < YEAR('$todayDate')")
+       return Customer::where($type,"<>", null)
+      ->whereRaw($rawLower, [(int) $month1, (int) $date1, $todayDate])
+      ->whereRaw($rawUpper, [(int) $month2, (int) $date2, $todayDate])
       ->paginate(25); 
      
       
@@ -788,12 +795,12 @@ public function getBirthdayData($searchkey,$todayDate,$date1,$month1,$date2,$mon
 
     }else{
 
-      return Customer::where("$type","<>", null)
-      ->whereRaw("MONTH($type) >=$month1 AND DAY($type) >= $date1 AND YEAR($type) < YEAR('$todayDate')")
-      ->whereRaw("MONTH($type)<=$month2 AND DAY($type) <=$date2 AND YEAR($type) < YEAR('$todayDate')")
+      return Customer::where($type,"<>", null)
+      ->whereRaw($rawLower, [(int) $month1, (int) $date1, $todayDate])
+      ->whereRaw($rawUpper, [(int) $month2, (int) $date2, $todayDate])
       ->where(function($query) use($searchkey,$type){
         $query->orWhere('name','LIKE', '%'.$searchkey.'%');
-        $query->orWhere("$type",'LIKE', '%'.$searchkey.'%');
+        $query->orWhere($type,'LIKE', '%'.$searchkey.'%');
         $query->orWhere('email','LIKE', '%'.$searchkey.'%');
         $query->orWhere('mobile','LIKE', '%'.$searchkey.'%');
       })
