@@ -77,3 +77,17 @@ protected $casts = [
 App on Laravel 10 / PHP 8.1, no `$dates` remaining. Merge, tag `v-l10`.
 
 ## Notes / deviations
+
+**DONE — Laravel 10.50.2 on PHP 8.1.10.**
+- **All 17 models converted `protected $dates = array(...)` → `protected $casts = [... => 'datetime']`**
+  via a whitespace/LF-preserving regex (verified 0 `$dates` remain). `'datetime'` is the faithful
+  equivalent of old `$dates` (Carbon instances). Models with classic date accessors/mutators
+  (Payment `payment_date`, Purchase/PurchaseReturn `mrn_date`, Stock `date`) keep their custom
+  output — accessors take precedence over casts, identical to the old `$dates` behaviour.
+- **dompdf → ^2.0:** the `PDF` alias is auto-discovered (now `Barryvdh\DomPDF\Facade\Pdf`); the ~100
+  `PDF::loadView()` calls are unchanged and the alias resolves (smoke test passes).
+- **`laravelcollective/html` ^6.4 supports L10** — no fork needed yet (re-evaluate at L11).
+- `framework` ^10, `tinker` ^2.8, `ui` ^4.2, `mockery` ^1.5. **Security advisories 14 → 3.**
+- `phpunit` kept at ^9.5 (9.6.34) — fully L10-compatible; bump to 10/11 deferred to Phase 9 (L11).
+- No `predis`/`dispatchNow` usage in app — those L10 notes N/A.
+- Deep per-field date-output verification deferred to the final manual smoke pass.
