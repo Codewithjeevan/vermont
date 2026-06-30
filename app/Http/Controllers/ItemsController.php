@@ -1395,13 +1395,20 @@ function searchItem(Request $request){
             $item = null;
         }else{
             $item = Item::with(["categories", "units"])
-            ->whereRaw("(CASE WHEN $intId = 0 THEN 1 ELSE items.id = $intId END) AND 
-                (CASE WHEN '$productCode' LIKE '' THEN 1 ELSE items.productCode LIKE '$productCode' END) AND
-                (CASE WHEN '$strItemName' LIKE '' THEN 1 ELSE items.itemName LIKE '$strItemName' END) AND
-                (CASE WHEN '$strBarcode' LIKE '' THEN 1 ELSE items.barcode LIKE '$strBarcode' END) AND
-                (CASE WHEN '$serial_number' LIKE '' THEN 1 ELSE items.serial_number LIKE '$serial_number' END) AND
-                (CASE WHEN $intCategory = 0 THEN 1 ELSE items.category = $intCategory END) 
-                ")->first();
+            ->whereRaw("(CASE WHEN ? = 0 THEN 1 ELSE items.id = ? END) AND 
+                (CASE WHEN ? LIKE '' THEN 1 ELSE items.productCode LIKE ? END) AND
+                (CASE WHEN ? LIKE '' THEN 1 ELSE items.itemName LIKE ? END) AND
+                (CASE WHEN ? LIKE '' THEN 1 ELSE items.barcode LIKE ? END) AND
+                (CASE WHEN ? LIKE '' THEN 1 ELSE items.serial_number LIKE ? END) AND
+                (CASE WHEN ? = 0 THEN 1 ELSE items.category = ? END) 
+                ", [
+                    $intId, $intId,
+                    $productCode, $productCode,
+                    $strItemName, $strItemName,
+                    $strBarcode, $strBarcode,
+                    $serial_number, $serial_number,
+                    $intCategory, $intCategory,
+                ])->first();
         }
 
         return Response(array(
@@ -1433,12 +1440,18 @@ function searchBarcode(Request $request){
         $serial_number=(isset($objData['serial_number'])) ?  $objData['serial_number'] : $serial_number;
 
         $resultdb = Item::select("barcode")
-        ->whereRaw("(CASE WHEN $intId = 0 THEN 1 ELSE items.id = $intId END) AND 
-            (CASE WHEN '$strItemName' LIKE '' THEN 1 ELSE items.itemName LIKE '%$strItemName%' END) AND
-            (CASE WHEN '$strBarcode' LIKE '' THEN 1 ELSE items.barcode LIKE '%$strBarcode%' END) AND
-            (CASE WHEN '$serial_number' LIKE '' THEN 1 ELSE items.serial_number LIKE '%$serial_number%' END) AND
-            (CASE WHEN $intCategory = 0 THEN 1 ELSE items.category = $intCategory END) 
-            ")->take(10)->get()->toArray();
+        ->whereRaw("(CASE WHEN ? = 0 THEN 1 ELSE items.id = ? END) AND 
+            (CASE WHEN ? LIKE '' THEN 1 ELSE items.itemName LIKE ? END) AND
+            (CASE WHEN ? LIKE '' THEN 1 ELSE items.barcode LIKE ? END) AND
+            (CASE WHEN ? LIKE '' THEN 1 ELSE items.serial_number LIKE ? END) AND
+            (CASE WHEN ? = 0 THEN 1 ELSE items.category = ? END) 
+            ", [
+                $intId, $intId,
+                $strItemName, '%'.$strItemName.'%',
+                $strBarcode, '%'.$strBarcode.'%',
+                $serial_number, '%'.$serial_number.'%',
+                $intCategory, $intCategory,
+            ])->take(10)->get()->toArray();
 
         $barcodes = array_column($resultdb, 'barcode');
 
