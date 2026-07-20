@@ -529,14 +529,14 @@ class BillingsController extends Controller
                 if(count($returnItems)!=0){
 
 
-                    $retrunItemsQty = DB::select(DB::raw( "SELECT SUM(bri.qty) as qty FROM   billing_items bi 
+                    $retrunItemsQty = DB::select( "SELECT SUM(bri.qty) as qty FROM   billing_items bi 
                         INNER JOIN   ( bill_returns br   INNER JOIN     bill_return_items bri  
                         ON br.id = bri.return_id   ) 
                         ON   bi.id = bri.existId
                         WHERE   br.billing_id =  $billItems->id
                         AND  bri.item_id = $billItem->item_id 
                         AND  bri.existId = $billItem->id 
-                        GROUP BY bri.item_id, bri.serial_no, bri.offer_type, bri.existId"));
+                        GROUP BY bri.item_id, bri.serial_no, bri.offer_type, bri.existId");
 
                     if(count($retrunItemsQty)){
                         $billItem['qtyReturn'] = $retrunItemsQty[0]->qty;

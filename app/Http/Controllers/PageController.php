@@ -38,7 +38,10 @@ class PageController extends Controller
     /** Post-login landing redirect by role (was the `/home` route). */
     public function home()
     {
-        if (Auth::user()->roleId == 3) {
+        // Guests fall through to the dashboard redirect, whose `auth`
+        // middleware bounces them to login (pre-PHP-8 behavior: reading
+        // roleId on null was a notice, not an ErrorException).
+        if (Auth::check() && Auth::user()->roleId == 3) {
             if (\Common::can_billscreen_view('billing', 'billscreen') == 2) {
                 return redirect('billing/billing2');
             }

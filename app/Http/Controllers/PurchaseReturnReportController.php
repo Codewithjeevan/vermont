@@ -476,7 +476,7 @@ return back();
 				->orderBy('id', 'asc')    
 				->get();
 			}else{
-				$items = DB::select(DB::raw("select i.* from purchase_return_items as pri
+				$items = DB::select("select i.* from purchase_return_items as pri
 					inner join items i on i.id = pri.item_id
 					inner join purchase_returns pr on pr.id = pri.purchase_return_id
 					inner join purchases p on p.supplierBillNo = pr.supplier_billno and p.supplier_id = pr.supplier_id
@@ -484,7 +484,7 @@ return back();
 					(case when $mrn_no = null or $mrn_no ='' then 1 =1 else p.id= $mrn_no end)
 					and 
 					((case when '".$searchKey."' ='' then 1=1 else  i.itemName like '%".$searchKey."%' end) || (case when '".$searchKey."' ='' then 1=1 else  i.barcode like '%".$searchKey."%' end))
-					"));
+					");
 				if($mrn_no != null){
 					$supplier_id = DB::select("select p.supplier_id from purchases p where p.id= $mrn_no");
 				}
