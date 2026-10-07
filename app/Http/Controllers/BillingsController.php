@@ -957,8 +957,23 @@ class BillingsController extends Controller
             }
 
             else{
- 
-                
+
+                /**
+                 * Planet Tax Free mandates shopper.email in the issuance payload from 1 Oct 2026.
+                 * Planet rejects the transaction (400 "Email: required field") without it,
+                 * so validate here and give the cashier a clear message before calling the API.
+                 */
+                $shopperEmail = isset($reqPara["customer"]["email"]) ? trim($reqPara["customer"]["email"]) : '';
+                if($shopperEmail === '' || filter_var($shopperEmail, FILTER_VALIDATE_EMAIL) === false){
+                    return Response(array(
+                        "status" => "warning",
+                        "code" => 999,
+                        "message" => "A valid customer email is required for Tax Free issuance",
+                        'vatRefund' => null
+                    ));
+                }
+                $reqPara["customer"]["email"] = $shopperEmail;
+
                  $items = $reqPara["items"];
                  $items1=[];
        foreach($items as $i){
@@ -1010,6 +1025,7 @@ class BillingsController extends Controller
              "lastName"=>$reqPara["customer"]['lastName'],
              "nationality"=>$reqPara["customer"]['nationality'],
              "countryOfResidence"=>$reqPara["customer"]['countryOfResidence'],
+             "email"=>$shopperEmail,
              "phoneNumber"=>$reqPara["customer"]['customerNumber'],
              "birth"=>array(
                 "date"=>   (new Carbon($reqPara["customer"]['birthday']))->format('Y-m-d'),
@@ -1035,6 +1051,7 @@ class BillingsController extends Controller
           //  $csrfToken = Crypt::decrypt(Cookie::get('XSRF-TOKEN'));
            // $cookies= "X-XSRF-TOKEN: $csrfToken";
             $send=json_encode($data);
+            Log::info("Planet new-transaction request", ["receiptNumber" => $data["receiptNumber"], "payload" => $send]);
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -1046,13 +1063,14 @@ class BillingsController extends Controller
             curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json',$authorization));
           //   curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
             curl_setopt($ch, CURLOPT_POSTFIELDS,$send);
-          
-            $httpCode = curl_getinfo($ch ,CURLINFO_HTTP_CODE); // this results 0 every time
+
             $str = curl_exec($ch);
-       
-            if ($str=== false) 
+            $httpCode = curl_getinfo($ch ,CURLINFO_HTTP_CODE);
+
+            if ($str=== false)
                 $str = curl_error($ch);
                 $response1=json_decode($str,true);
+            Log::info("Planet new-transaction response", ["receiptNumber" => $data["receiptNumber"], "http" => $httpCode, "body" => $str]);
 
              if($response1["code"]==50 || $response1["code"]==22 || $response1["code"]==400 || $response1["code"]==27 || $response1["code"]==37|| $response1["code"]==20 || $response1["code"]==23 || $response1["code"]==43 || $response1["code"]==313 || $response1==null || $response1["code"]!=12)
              {

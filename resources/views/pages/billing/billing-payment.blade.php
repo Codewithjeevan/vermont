@@ -223,6 +223,13 @@
                                  <input type="text" placeholder="@lang('glob.countryOfResidence')" class="form-control input-xs keyboard2" id="countryOfResidence" v-model="billing.customer.countryOfResidence" :required=" (billing.payment_mode == 3 || (billing.customer.customerNumber.length==9 || billing.customer.customerNumber.length==10)||tax_refund_bill==1)? true :false">
                               </div>
                            </div>
+                           {{-- Planet Tax Free: shopper.email is mandatory in the issuance payload from 1 Oct 2026 --}}
+                           <div class="col-md-12 col-sm-12 less-padding-left less-padding-right">
+                              <div class="form-group no-h-padding  margin-b-2px numpad-input">
+                                 <label v-if="!billing.home_delivery" class="control-label" >@lang('glob.email')<span style="color:red">*</span></label>
+                                 <input type="email" placeholder="@lang('glob.email')" class="form-control input-xs keyboard2" id="tax_refund_email" v-model="billing.customer.email" :required="tax_refund_bill==1 ? true : false">
+                              </div>
+                           </div>
                            <!-- <div class="less-padding-left less-padding-right col-md-6 col-sm-6" >
                               <div class="form-group no-h-padding  margin-b-2px numpad-input">
                                
